@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+/* custom */
+
+.vt-app {
+  width: 1200px;
+  margin: 0 auto;
+  background-color: bisque;
+}
+
+/* header */
+
+.vt-header {
+  padding: 2px;
+  background-color: azure;
+}
+
+.vt-header-item {
+  margin: 0 2px;
+  text-underline: black;
+}
+
+
+/* helper */
+.flex {
+  display: flex;
+}

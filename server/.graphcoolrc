@@ -1,0 +1,3 @@
+targets:
+  vt-prod: shared-eu-west-1/cjfuv3pfb60oo0126e3maap3j
+  default: vt-prod

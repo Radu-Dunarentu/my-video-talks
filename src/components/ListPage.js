@@ -1,6 +1,6 @@
 import React from 'react'
 import Post from './Post';
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 
 class ListPage extends React.Component {
@@ -18,10 +18,17 @@ class ListPage extends React.Component {
         return (
             this.props.allPostsQuery.allPosts && this.props.allPostsQuery.allPosts.map(el => {
                 return (
-                    <Post key={el.id} post={el}/>
+                    <Post key={el.id} post={el} vote={this.vote}/>
                 )
             })
         )
+    }
+
+    vote = async (value, total, id) => {
+      total += value;
+      console.log('totals is', total, id);
+      await this.props.updatePostMutation({variables: {id,votes: total}});
+      console.log('finished');
     }
 }
 
@@ -31,15 +38,37 @@ const ALL_POSTS_QUERY = gql`
       id
       imageUrl
       description
+      votes
     }
   }
 `;
 
-const ListPageWithQuery = graphql(ALL_POSTS_QUERY, {
+const UPDATE_POST_MUTATION = gql`
+  mutation UpdatePostMutation($id: ID!, $votes: Int!) {
+      updatePost(id: $id, votes: $votes) {
+          id
+          votes
+      }
+  }
+`;
+
+//const UpdatePostWithMutation = graphql(UPDATE_POST_MUTATION, {name: 'updatePostMutation'})(ListPage);
+
+/*const ListPageWithQuery = graphql(ALL_POSTS_QUERY, {
     name: 'allPostsQuery',
     options: {
         fetchPolicy: 'network-only',
     },
-})(ListPage);
+})(ListPage);*/
 
-export default ListPageWithQuery;
+const ListPageComponent = compose(
+  graphql(UPDATE_POST_MUTATION, {name: 'updatePostMutation'}),
+  graphql(ALL_POSTS_QUERY, {
+    name: 'allPostsQuery',
+    options: {
+      fetchPolicy: 'network-only',
+    },
+  })
+)(ListPage);
+
+export default ListPageComponent;

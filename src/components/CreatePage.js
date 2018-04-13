@@ -26,14 +26,14 @@ const modalStyle = {
         background: 'none',
         boxShadow: '0 1px 7px rgba(0,0,0,.2)',
     },
-}
+};
 
 class CreatePage extends React.Component {
 
     state = {
         description: '',
         imageUrl: '',
-    }
+    };
 
     render() {
 
@@ -90,7 +90,7 @@ class CreatePage extends React.Component {
 
 const CREATE_POST_MUTATION = gql`
     mutation CreatePostMutation($description: String!, $imageUrl: String!) {
-        createPost(description: $description, imageUrl: $imageUrl) {
+        createPost(description: $description, imageUrl: $imageUrl, votes: 0) {
             id
             description
             imageUrl

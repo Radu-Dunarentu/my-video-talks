@@ -8,6 +8,7 @@ body {
 
 .vt-app {
   width: 1200px;
+  min-height: 600px;
   margin: 0 auto;
   background-color: bisque;
 }
@@ -24,8 +25,31 @@ body {
   text-underline: black;
 }
 
+/*
+ post
+*/
+.vt-post-container {
+  background-color: burlywood;
+  padding: 4px 8px;
+  margin: 8px 16px;
+}
+
+.vt-post-description {
+  margin: 0 4px;
+}
+
+.vt-post-votes {
+  font-size: 16px;
+  margin: 0 4px;
+}
+
 
 /* helper */
 .flex {
   display: flex;
+}
+
+.vt-btn {
+  margin: 0 2px;
+  border-radius: 4px;
 }

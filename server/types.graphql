@@ -29,4 +29,5 @@ type Post @model {
 
   description: String!
   imageUrl: String!
+  votes: Int!
 }
